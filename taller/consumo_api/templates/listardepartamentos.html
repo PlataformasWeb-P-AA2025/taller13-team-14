@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Departamentos</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        .container { max-width: 800px; margin: auto; }
+        .item { border: 1px solid #ddd; padding: 1em; margin-bottom: 1em; }
+        nav { margin-top: 2em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Departamentos (Total: {{ numero_departamentos }})</h1>
+
+        {% for d in departamentos %}
+            <div class="item">
+                <h3>Propietario: {{ d.nombre_propietario }}</h3>
+                <ul>
+                    <li><b>Costo:</b> ${{ d.costo }}</li>
+                    <li><b>Número de cuartos:</b> {{ d.numero_cuartos }}</li>
+                    <li><b>Edificio:</b> {{ d.edificio.nombre }}</li>
+                </ul>
+            </div>
+        {% else %}
+            <p>No hay departamentos registrados.</p>
+        {% endfor %}
+
+        <hr>
+        <nav>
+            <p><a href="{{ url_for('crear_departamento') }}">Crear un Nuevo Departamento</a></p>
+            <p><a href="{{ url_for('listaredificios') }}">Ver la Lista de Edificios</a></p>
+        </nav>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<h2>Listado de Edificios</h2>
+<h3>Número de edificios: {{ numero_edificios }}</h3>
+
+{% for e in edificios %}
+  <strong>{{ e.nombre }}</strong><br/>
+  <ul>
+    <li><strong>Dirección:</strong> {{ e.direccion }}</li>
+    <li><strong>Ciudad:</strong> {{ e.ciudad }}</li>
+    <li><strong>Tipo:</strong> {{ e.tipo }}</li>
+  </ul>
+  <br/>
+{% endfor %}
+
+<a href="/">Volver al inicio</a>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Edificio</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        .container { max-width: 600px; margin: auto; }
+        form div { margin-bottom: 1em; }
+        label { display: block; }
+        /* Ajuste para que input y select tengan el mismo tamaño */
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 15px; }
+        .flash-success { padding: 1em; background-color: #d4edda; color: #155724; border-radius: 5px; margin-bottom: 1em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crear Nuevo Edificio</h1>
+
+        {# Mostrar mensajes flash de Flask #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div>
+                <label for="nombre">Nombre del Edificio:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+            <div>
+                <label for="ciudad">Ciudad:</label>
+                <input type="text" id="ciudad" name="ciudad" required>
+            </div>
+            <div>
+                <label for="tipo">Tipo de Edificio:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="" disabled selected>-- Seleccione una opción --</option>
+                    <option value="comercial">Comercial</option>
+                    <option value="residencial">Residencial</option>
+                </select>
+            </div>
+
+            <button type="submit">Crear Edificio</button>
+        </form>
+
+        <p style="margin-top: 2em;"><a href="{{ url_for('listaredificios') }}">Volver a la lista de edificios</a></p>
+    </div>
+</body>
+</html>

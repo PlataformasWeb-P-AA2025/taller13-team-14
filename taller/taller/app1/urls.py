@@ -17,8 +17,24 @@ Including another URLconf
 from django.urls import path, include
 
 from app1 import views
+from rest_framework import routers
+from django.contrib.auth import views as auth_views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'edificios', views.EdificioViewSet)
+router.register(r'departamentos', views.DepartamentoViewSet)
+
 
 urlpatterns = [
         path('', views.index, name='index'),
-
+        path('api/', include(router.urls)),
+        path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+        path('edificios/listar/', views.listar_edificios, name='listar_edificios'),
+        path('departamentos/listar/', views.listar_departamentos, name='listar_departamentos'),
+        path('edificios/crear/', views.crear_edificio, name='crear_edificio'),
+        path('departamentos/crear/', views.crear_departamento, name='crear_departamento'),
+        path('entrando/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+        path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 ]

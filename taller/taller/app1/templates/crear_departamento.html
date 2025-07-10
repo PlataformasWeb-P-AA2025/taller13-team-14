@@ -1,0 +1,11 @@
+<h2>Crear Nuevo Departamento</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <button type="submit">Crear Departamento</button>
+</form>
+
+<a href="{% url 'listar_departamentos' %}">Volver al listado de departamentos</a>
+<a href="/">Volver al inicio</a>

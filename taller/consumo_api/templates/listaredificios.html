@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Edificios</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        .container { max-width: 800px; margin: auto; }
+        .item { border: 1px solid #ddd; padding: 1em; margin-bottom: 1em; }
+        nav { margin-top: 2em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Edificios (Total: {{ numero_edificios }})</h1>
+
+        {% for e in edificios %}
+            <div class="item">
+                <h3>{{ e.nombre }}</h3>
+                <ul>
+                    <li><b>Dirección:</b> {{ e.direccion }}, {{ e.ciudad }}</li>
+                    <li><b>Tipo:</b> {{ e.tipo }}</li>
+                </ul>
+            </div>
+        {% else %}
+            <p>No hay edificios registrados.</p>
+        {% endfor %}
+
+        <hr>
+        <nav>
+            <p><a href="{{ url_for('crear_edificio') }}">Crear un Nuevo Edificio</a></p>
+            <p><a href="{{ url_for('listardepartamentos') }}">Ver la Lista de Departamentos</a></p>
+        </nav>
+    </div>
+</body>
+</html>

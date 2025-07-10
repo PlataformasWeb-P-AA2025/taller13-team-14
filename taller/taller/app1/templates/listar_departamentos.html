@@ -1,0 +1,15 @@
+<h2>Listado de Departamentos</h2>
+
+<ul>
+  {% for d in departamentos %}
+    <li>
+      <strong>Propietario:</strong> {{ d.nombre_propietario }}<br>
+      <strong>Costo:</strong> ${{ d.costo }}<br>
+      <strong>Cuartos:</strong> {{ d.numero_cuartos }}<br>
+      <strong>Edificio ID:</strong> {{ d.edificio }}<br>
+    </li>
+    <br>
+  {% endfor %}
+</ul>
+
+<a href="/">Volver al inicio</a>

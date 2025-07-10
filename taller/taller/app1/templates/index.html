@@ -1,1 +1,34 @@
-<h2>Hola</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Panel Principal - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <h1>Panel Principal</h1>
+    <div class="card-container">
+        <div class="card">
+            <h2>Listar Edificios</h2>
+            <p>Visualiza todos los edificios registrados.</p>
+            <a href="{% url 'listar_edificios' %}">Ver Edificios</a>
+        </div>
+        <div class="card">
+            <h2>Crear Edificio</h2>
+            <p>Registra un nuevo edificio en el sistema.</p>
+            <a href="{% url 'crear_edificio' %}">Crear Edificio</a>
+        </div>
+        <div class="card">
+            <h2>Listar Departamentos</h2>
+            <p>Consulta los departamentos existentes.</p>
+            <a href="{% url 'listar_departamentos' %}">Ver Departamentos</a>
+        </div>
+        <div class="card">
+            <h2>Crear Departamento</h2>
+            <p>Añade un nuevo departamento a un edificio.</p>
+            <a href="{% url 'crear_departamento' %}">Crear Departamento</a>
+        </div>
+    </div>
+</body>
+</html>

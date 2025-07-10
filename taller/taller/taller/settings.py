@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'app1',
 
     'rest_framework',
+    'rest_framework.authtoken',
     # 'corsheaders',
 ]
 
@@ -81,6 +82,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -144,11 +146,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# agregar apps para Auth - paso 4
 LOGIN_REDIRECT_URL = reverse_lazy('index')
-
+SITE_ID = 1
 # agregar información para
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication', # Habilita la autenticación por token globalmente
+        'rest_framework.authentication.SessionAuthentication', # Mantener para el navegador y el panel admin
+    ],
 }
