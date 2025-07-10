@@ -20,9 +20,22 @@ def listaredificios():
 def listardepartamentos():
     r = requests.get("http://localhost:8000/api/departamentos/", headers=headers)
     datos = json.loads(r.content)
-    departamentos = datos['results']
-    numero_departamentos = datos['count']
-    return render_template("listardepartamentos.html", departamentos=departamentos,
+    departamentos_originales = datos['results']
+    numero_departamentos = json.loads(r.content)['count']
+    
+    departametos = []
+    
+    for d in departamentos_originales:
+        
+        departametos.append({
+            'nombre_propietario': d['nombre_propietario'],
+            'costo': d['costo'],
+            'numero_cuartos': d['numero_cuartos'],
+            'edificio': obtener_edificio(d['edificio']) 
+        })
+
+    return render_template("listardepartamentos.html", 
+                           departamentos=departametos,
                            numero_departamentos=numero_departamentos)
 
 @app.route("/crear/edificio", methods=['GET', 'POST'])
@@ -78,6 +91,11 @@ def crear_departamento():
         return redirect(url_for('listardepartamentos'))    
     return render_template("creardepartamentos.html", edificios=edificios)
 
+# funciones ayuda
+def obtener_edificio(url):
+    r = requests.get(url, headers=headers)
+    datos_edificio = json.loads(r.content)
+    return datos_edificio
 
 if __name__ == "__main__":
     app.run(debug=True)
