@@ -6,7 +6,12 @@
       <strong>Propietario:</strong> {{ d.nombre_propietario }}<br>
       <strong>Costo:</strong> ${{ d.costo }}<br>
       <strong>Cuartos:</strong> {{ d.numero_cuartos }}<br>
-      <strong>Edificio ID:</strong> {{ d.edificio }}<br>
+      <strong>Edificio:</strong> {{ d.edificio }}<br>
+
+      <p style="margin-top: 5px;">
+        <a href="{% url 'editar_departamento' d.id %}">Editar</a> |
+        <a href="{% url 'eliminar_departamento' d.id %}" style="color: red;">Eliminar</a>
+      </p>
     </li>
     <br>
   {% endfor %}

@@ -1,0 +1,12 @@
+<h1>Editando Departamento del propietario: {{ formulario.instance.nombre_propietario }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ formulario.as_p }}
+
+    <button type="submit">Guardar Cambios</button>
+</form>
+
+<br>
+<a href="{% url 'listar_departamentos' %}">Cancelar y volver a la lista</a>

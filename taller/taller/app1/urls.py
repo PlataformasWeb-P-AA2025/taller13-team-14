@@ -37,4 +37,10 @@ urlpatterns = [
         path('departamentos/crear/', views.crear_departamento, name='crear_departamento'),
         path('entrando/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
         path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+        
+        path('edificios/editar/<int:pk>/', views.editar_edificio, name='editar_edificio'),
+        path('edificios/eliminar/<int:pk>/', views.eliminar_edificio, name='eliminar_edificio'),
+
+        path('departamentos/editar/<int:pk>/', views.editar_departamento, name='editar_departamento'),
+        path('departamentos/eliminar/<int:pk>/', views.eliminar_departamento, name='eliminar_departamento'),
 ]

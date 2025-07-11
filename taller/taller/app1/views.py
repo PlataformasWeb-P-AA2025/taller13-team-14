@@ -51,6 +51,54 @@ def crear_departamento(request):
         form = DepartamentoForm()
     return render(request, 'crear_departamento.html', {'form': form})
 
+@login_required(login_url='/entrando/login/')
+@permission_required('app1.change_edificio', login_url="/entrando/login/")
+def editar_edificio(request, pk):
+    edificio = Edificio.objects.get(pk=pk)
+    if request.method == 'POST':
+        formulario = EdificioForm(request.POST, instance=edificio)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('listar_edificios')
+    else:
+        formulario = EdificioForm(instance=edificio)
+    diccionario = {'formulario': formulario}
+    return render(request, 'editar_edificio.html', diccionario)
+
+@login_required(login_url='/entrando/login/')
+@permission_required('app1.delete_edificio', login_url="/entrando/login/")
+def eliminar_edificio(request, pk):
+    edificio = Edificio.objects.get(pk=pk)
+    edificio.delete()
+    return redirect('listar_edificios')
+
+@login_required(login_url='/entrando/login/')
+@permission_required('app1.change_departamento', login_url="/entrando/login/")
+def editar_departamento(request, pk):
+    """
+    Edita un registro existente de Departamento.
+    """
+    departamento = Departamento.objects.get(pk=pk)
+    if request.method == 'POST':
+        formulario = DepartamentoForm(request.POST, instance=departamento)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('listar_departamentos')
+    else:
+        formulario = DepartamentoForm(instance=departamento)
+        
+    diccionario = {'formulario': formulario}
+    return render(request, 'editar_departamento.html', diccionario)
+
+@login_required(login_url='/entrando/login/')
+@permission_required('app1.delete_departamento', login_url="/entrando/login/")
+def eliminar_departamento(request, pk):
+    """
+    Elimina un registro de Departamento directamente.
+    """
+    departamento = Departamento.objects.get(pk=pk)
+    departamento.delete()
+    return redirect('listar_departamentos')
 # Vistas tipo API
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
